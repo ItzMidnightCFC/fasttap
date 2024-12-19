@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fast Tapper</title>
+  
+  <style>
+    #Btn{
+      background: #192227;
+      color: white;
+      width: 65%;
+      height: 35vh;
+      border-radius: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-size: 4.3vh;
+      align-self: center;
+    }
+    
+    #Btn:active{
+      background: #192227C4
+    }
+    
+    @keyframes touch{
+      from{
+        background: #192227C4
+      }
+      
+      to{
+        background: #1DBB4F;
+      }
+    }
+    
+    #Pushcnt{
+      display: flex;
+      justify-content: center;
+    }
+    
+    #ammount{
+      width: 20%;
+      height: 10vh;
+      background: #192227;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      font-size: 3vh
+    }
+    
+    
+    #sec {
+       position: absolute;
+       right: 2%;
+       transform: translateY(-30%);
+       width: 20%;
+       height: 10vh;
+       background: #192227;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       overflow: hidden;
+       color: white;
+       font-size: 3vh
+     }
+  </style>
+</head>
+
+<body>
+  
+  <h4>Tap the amount of number given in:</h4>
+  
+  <p id="sec">5</p>
+  <p id="ammount">?</p>
+  
+  <div id="Pushcnt">
+  <div id="Btn" onclick="Taps()">READY</div>
+  
+  </div>
+
+<script>
+
+  var num = 0
+  var count = 5
+  var ammount = document.getElementById("ammount")
+  var sec = document.getElementById("sec")
+  var Btn = document.getElementById("Btn")
+  var rand = Math.floor(Math.random() * 300 + 1)
+  var wrg = 'g'
+  var seT = 5
+  var halfresult = rand / 2
+  var endresult = halfresult / 2.74
+  var randnum = Math.ceil(endresult)
+  console.log(endresult)
+  Btn.innerHTML = "READY"
+  
+  
+  
+   var EndTime = randnum + 5
+  
+  function CountDown(){
+    count--
+    seT--
+    var stop = "start"
+    sec.innerHTML = count
+    
+    if(seT == 3){
+      Btn.innerHTML = "SET"
+    }
+    
+    if(count == 0){
+      Btn.innerHTML = "START"
+      ammount.innerHTML = rand
+      count = randnum
+  }
+     
+  }
+  
+  function AnalyzeScore(){
+    EndTime--
+    if(EndTime == 0 && Btn.innerHTML >= rand){
+      clearInterval(setcount)
+      clearInterval(endedtime)
+      Btn.innerHTML = "You Won"
+      Btn.style.background = "green"
+      Btn.onclick = "Not()"
+    }
+    
+    if (Btn.innerHTML >= rand) {
+      clearInterval(setcount)
+      clearInterval(endedtime)
+      Btn.innerHTML = "You Won"
+      Btn.style.background = "green"
+      Btn.onclick = "Not()"
+    }
+    
+  if(EndTime == 0 && Btn.innerHTML < rand){
+    clearInterval(setcount)
+    clearInterval(endedtime)
+    Btn.innerHTML = "You Failed"
+    Btn.style.background = "red"
+    Btn.onclick = "Not()"
+   }
+    
+   if(EndTime == 0 && Btn.innerHTML == "START"){
+      clearInterval(setcount)
+      clearInterval(endedtime)
+      Btn.innerHTML = "You Didn't Touch"
+      Btn.style.background = "red"
+      Btn.onclick = "Not()"
+    }
+  }
+  
+  function Not(){
+    console.log("hahah")
+    alert("bla")
+  }
+  
+  function Taps() {
+    if (Btn.innerHTML == "READY") {
+      Btn.innerHTML = "Failed"
+      Btn.style.background = "#FF0E0E"
+      window.location.href = "/Mains/OnePlayer.html"
+    }
+    
+    else if (Btn.innerHTML == "SET") {
+      Btn.innerHTML = "Failed"
+      Btn.style.background = "#FF0E0E"
+      window.location.href = "/Mains/OnePlayer.html"
+    }
+  
+    else {
+      num++
+      Btn.innerHTML = num
+    }
+  }
+  
+
+  endedtime = setInterval(AnalyzeScore , 1000)
+  setcount = setInterval(CountDown , 1000)
+  
+  
+</script>
+</body>
+
+</html>
